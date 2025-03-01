@@ -1,0 +1,2 @@
+-Yc 1: Nếu chọn "Cancel" đầu ra sẽ mặc định là "No"
+-Yc 2: Như code ở commit thứ 2 của bài 6.1 thay đổi thêm YES_NO_OPTION để giải quyết.
