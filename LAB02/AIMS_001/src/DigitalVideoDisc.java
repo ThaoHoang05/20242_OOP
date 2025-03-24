@@ -31,6 +31,10 @@ public class DigitalVideoDisc {
         this.cost = cost;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -46,5 +50,21 @@ public class DigitalVideoDisc {
     }
     public float getCost() {
         return cost;
+    }
+    public int getId(){
+        return new nbDigitalVideoDiscs().getId();
+    }
+    
+}
+
+class nbDigitalVideoDiscs {
+    private static int nbDigitalVideoDiscs = 0;
+    private int id;
+    public nbDigitalVideoDiscs() {
+        nbDigitalVideoDiscs++;
+        this.id= nbDigitalVideoDiscs;
+    }
+    public int getId() {
+        return id;
     }
 }
