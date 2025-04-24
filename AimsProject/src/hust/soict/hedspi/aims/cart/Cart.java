@@ -2,7 +2,7 @@ package hust.soict.hedspi.aims.cart;
 
 import java.util.ArrayList;
 import hust.soict.hedspi.aims.media.Media;
-import src.hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 
 public class Cart {
 
