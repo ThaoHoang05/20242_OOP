@@ -1,0 +1,28 @@
+Question:
+1. What class should implement the Comparable interface
+    Media class
+2.In those classes, how should you implement the compareTo()method to reflect the ordering that
+  we want?
+  Cần override compareTo() trong lớp.
+3.Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this
+  Comparable interface approach?
+  Không. Vì Comparable chỉ cho phép xắp xếp theo một điều kiện duy nhất.
+4. Suppose the DVDs have a different ordering rule from the other media types, that is by title, then
+   decreasing length, then cost. How would you modify your code to allow this?
+   @Override
+       public int compareTo(Media other) {
+           if (other instanceof Disc) {
+               Disc otherDVD = (Disc) other;
+               int titleCompare = this.title.compareToIgnoreCase(otherDVD.title);
+               if (titleCompare != 0) return titleCompare;
+
+               int lengthCompare = Integer.compare(otherDVD.length, this.length); // giảm dần
+               if (lengthCompare != 0) return lengthCompare;
+
+               return Float.compare(this.cost, otherDVD.cost);
+           } else {
+               // fallback nếu so sánh với các media khác
+               return super.compareTo(other);
+           }
+       }
+
