@@ -16,6 +16,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.*;
 
+import hust.soict.hedspi.aims.media.Book;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.screen.store.MediaStore;
 import hust.soict.hedspi.aims.store.Store;
@@ -92,6 +94,15 @@ public class StoreManagerScreen extends JFrame {
 	
 	public static void main(String args[]) {
 		Store store = new Store();
+		store.addMedia(new DigitalVideoDisc("Harry Potter and the Philosopher's Stone","Fantasy","Chris Colombus" ,3.0f));
+		store.addMedia(new DigitalVideoDisc("Harry Potter and the Chamber of Secrets","Fantasy", "Chris Colombus",3.5f));
+		store.addMedia(new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f));
+		store.addMedia(new DigitalVideoDisc("Harry Potter and the Prisoner of Azkaban","Fantasy", "Chris Colombus",5.0f));
+		store.addMedia(new DigitalVideoDisc("Harry Potter and the Goblet of Fire", "Fantasy", "Chris Colombus", 4.5f));
+		store.addMedia(new DigitalVideoDisc("Harry Potter and the Order of Phoenix", "Fantasy","Chris Colombus", 6.9f));
+		store.addMedia(new Book("The Hunger Game", "Fantasy",5.5f));
+		store.addMedia(new Book("Catching Fire","Fiction/Fantasy/Romance",4.9f));
+		store.addMedia(new Book("When the breath becomes Air", "Memoir",10.0f));
 		new StoreManagerScreen(store);
 	}
 }
