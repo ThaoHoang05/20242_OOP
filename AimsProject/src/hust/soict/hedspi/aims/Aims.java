@@ -7,9 +7,9 @@ import hust.soict.hedspi.aims.store.Store;
 import java.util.Scanner;
 import hust.soict.hedspi.aims.media.Media;
 public class Aims {
-    static Store store = new Store();
-    static Cart anOrder = new Cart();
-    static Scanner scanf = new Scanner(System.in);
+    private static Store store = new Store();
+    private static Cart anOrder = new Cart();
+    private static Scanner scanf = new Scanner(System.in);
     public static void showMenu(){
 
         System.out.println("AIMS");
