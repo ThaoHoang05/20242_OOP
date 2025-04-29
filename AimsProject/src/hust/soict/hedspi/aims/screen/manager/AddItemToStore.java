@@ -5,12 +5,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,11 +15,7 @@ import javax.swing.JTextField;
 
 import hust.soict.hedspi.aims.media.Media;
 
-public abstract class AddItemToStore extends JFrame{
-	private String tfName;
-	private String tfCategory;
-	private float tfCost;
-	
+public abstract class AddItemToStore extends JFrame{	
 	public AddItemToStore() {
 	}
 	JPanel getHeader(){
@@ -42,7 +35,6 @@ public abstract class AddItemToStore extends JFrame{
         namePanel.setLayout(new FlowLayout());
         JLabel nameLabel = new JLabel("Name");
         JTextField nameField = new JTextField(50);
-        tfName = nameField.getText();
         namePanel.add(nameLabel);
         namePanel.add(nameField);
         nameLabel.setVerticalAlignment(Label.LEFT);
@@ -51,7 +43,6 @@ public abstract class AddItemToStore extends JFrame{
         namePanel.setLayout(new FlowLayout());
         JLabel categoryLabel = new JLabel("Category");
         JTextField categoryField = new JTextField(50);
-        tfCategory = categoryField.getText();
         categoryPanel.add(categoryLabel);
         categoryPanel.add(categoryField);
         categoryLabel.setVerticalAlignment(Label.LEFT);
@@ -60,7 +51,6 @@ public abstract class AddItemToStore extends JFrame{
         costPanel.setLayout(new FlowLayout());
         JLabel costLabel = new JLabel("Cost");
         JTextField costField = new JTextField(50);
-        tfCost = Float.parseFloat(costField.getText());
         costPanel.add(costLabel);
         costPanel.add(costField);
         costLabel.setVerticalAlignment(Label.LEFT);

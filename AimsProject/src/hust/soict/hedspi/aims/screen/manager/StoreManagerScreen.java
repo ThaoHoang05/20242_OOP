@@ -56,9 +56,27 @@ public class StoreManagerScreen extends JFrame {
 		viewStore.addActionListener(new ViewStore());
 		
 		JMenu smUpdateStore = new JMenu("Update Store");
-		smUpdateStore.add(new JMenuItem("Add Book"));
+		JMenuItem addBook = new JMenuItem("Add Book");
+		addBook.addActionListener(e->{
+
+		});
+		smUpdateStore.add(addBook);
 		smUpdateStore.add(new JMenuItem("Add CD"));
-		smUpdateStore.add(new JMenuItem("Add DVD"));
+		JMenuItem addDVD = new JMenuItem("Add DVD");
+		addDVD.addActionListener(e -> {
+			AddDigitalVideoDiscToStoreScreen newDVD = new AddDigitalVideoDiscToStoreScreen();
+
+			// Sau khi nhập xong
+			Media media = newDVD.getMedia();
+			if (media != null) {
+				store.addMedia(media);
+				JOptionPane.showMessageDialog(null, "DVD đã được thêm vào store!");
+			}
+
+			// Quay lại màn hình chính
+			new StoreManagerScreen(store);
+		});
+		smUpdateStore.add(addDVD);
 		menu.add(smUpdateStore);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -85,7 +103,7 @@ public class StoreManagerScreen extends JFrame {
 		center.setLayout(new GridLayout(3,3,2,2));
 		
 		ArrayList<Media> mediaInStore = store.getItemsInStore();
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < store.getItemsInStore().size(); i++) {
 			    if (i < mediaInStore.size()) {
 			        MediaStore cell = new MediaStore(mediaInStore.get(i));
 			        center.add(cell);
