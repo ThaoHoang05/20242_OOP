@@ -1,6 +1,8 @@
 package hust.soict.hedspi.aims.screen.manager;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -24,7 +26,7 @@ import hust.soict.hedspi.aims.store.Store;
 
 
 public class StoreManagerScreen extends JFrame {
-	private Store store;
+	private static Store store;
 	
 	public StoreManagerScreen(Store store) {
 		this.store = store;
@@ -49,7 +51,9 @@ public class StoreManagerScreen extends JFrame {
 	JMenuBar createMenuBar() {
 		JMenu menu = new JMenu("Options");
 		
-		menu.add(new JMenuItem("View store"));
+		JMenuItem viewStore = new JMenuItem("View store");
+		menu.add(viewStore);
+		viewStore.addActionListener(new ViewStore());
 		
 		JMenu smUpdateStore = new JMenu("Update Store");
 		smUpdateStore.add(new JMenuItem("Add Book"));
@@ -105,4 +109,13 @@ public class StoreManagerScreen extends JFrame {
 		store.addMedia(new Book("When the breath becomes Air", "Memoir",10.0f));
 		new StoreManagerScreen(store);
 	}
+	private class ViewStore implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			dispose();
+			new StoreManagerScreen(store);
+		}
+	 }
 }
