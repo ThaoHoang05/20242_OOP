@@ -44,7 +44,8 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStore {
 
                 JMenuItem viewStore = new JMenuItem("View store");
                 viewStore.addActionListener(e->{
-
+                        new StoreManagerScreen();
+                        dispose();
                 });
                 menu.add(viewStore);
 
