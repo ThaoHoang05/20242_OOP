@@ -17,23 +17,24 @@ import javax.swing.JTextField;
 
 
 import hust.soict.hedspi.aims.media.CompactDisc;
+import hust.soict.hedspi.aims.media.Track;
 
 
 public class AddCompactDiscToStoreScreen extends AddItemToStore{
 	private static JFrame inp;
 	private JTextField nameField;
+	private JTextField titleField;
 	private JTextField categoryField;
 	private JTextField costField;
-	private JTextField directorField;
+	private JTextField authorField;
 	private JTextField lengthField;
-	private JButton submit;
-	private CompactDisc cd;
+	private CompactDisc cd = new CompactDisc();
 	public AddCompactDiscToStoreScreen() {
 		super();
 		inp = new JFrame();
 
         inp.setTitle("Update Store");
-        inp.setSize(800, 400);
+        inp.setSize(800, 600);
         inp.setResizable(false);
         inp.setLayout(new BorderLayout());
         inp.add(super.createNorth(inp), BorderLayout.NORTH);
@@ -44,19 +45,19 @@ public class AddCompactDiscToStoreScreen extends AddItemToStore{
 	} 
 	JPanel getForm(){
         JPanel form = new JPanel();
-        form.setPreferredSize(new Dimension(1000, 1000));
+        form.setPreferredSize(new Dimension(800, 600));
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
-        JPanel namePanel = new JPanel();
-        namePanel.setLayout(new FlowLayout());
-        JLabel nameLabel = new JLabel("Name");
-        nameField = new JTextField(50);
-        namePanel.add(nameLabel);
-        namePanel.add(nameField);
-        nameLabel.setVerticalAlignment(Label.LEFT);
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new FlowLayout());
+        JLabel titleLabel = new JLabel("Title");
+        titleField = new JTextField(50);
+        titlePanel.add(titleLabel);
+        titlePanel.add(titleField);
+        titleLabel.setVerticalAlignment(Label.LEFT);
 
         JPanel categoryPanel = new JPanel();
-        namePanel.setLayout(new FlowLayout());
+        categoryPanel.setLayout(new FlowLayout());
         JLabel categoryLabel = new JLabel("Category");
         categoryField = new JTextField(50);
         categoryPanel.add(categoryLabel);
@@ -65,11 +66,18 @@ public class AddCompactDiscToStoreScreen extends AddItemToStore{
         
         JPanel directorPanel = new JPanel();
         directorPanel.setLayout(new FlowLayout());
-        JLabel directorLabel = new JLabel("Director");
-        directorField = new JTextField(50);
+        JLabel directorLabel = new JLabel("Artist");
+        authorField = new JTextField(50);
         directorPanel.add(directorLabel);
-        directorPanel.add(directorField);
+        directorPanel.add(authorField);
         directorLabel.setVerticalAlignment(Label.LEFT);
+        
+        JPanel nameTrackPanel = new JPanel();
+        nameTrackPanel.setLayout(new FlowLayout());
+        JLabel nameTrackLabel = new JLabel("Track's Name");
+        nameField = new JTextField(50);
+        nameTrackPanel.add(nameTrackLabel);
+        nameTrackPanel.add(nameField);
         
         JPanel lengthPanel = new JPanel();
         lengthPanel.setLayout(new FlowLayout());
@@ -87,50 +95,60 @@ public class AddCompactDiscToStoreScreen extends AddItemToStore{
         costPanel.add(costField);
         costLabel.setVerticalAlignment(Label.LEFT);
         
-        JPanel btnPanel = new JPanel();
-        JButton btn = new JButton("Submit");
-        btn.addActionListener(e -> {
-               try { dvd = new DigitalVideoDisc(nameField.getText(), categoryField.getText(), directorField.getText(), Integer.parseInt(lengthField.getText()), Float.parseFloat(costField.getText()));
-                  nameField.setText("");
-                  directorField.setText("");
-                  categoryField.setText("");
+        JPanel submitTrackPanel = new JPanel();
+        submitTrackPanel.setLayout(new FlowLayout());
+        JButton btnTrack = new JButton("Add track");
+        btnTrack.addActionListener(e -> {
+               try { 
+            	  cd.addTrack(new Track(nameField.getText(),Integer.parseInt(lengthField.getText()))) ;
+            	  nameField.setText("");
                   lengthField.setText("");
-                  costField.setText("");
-                System.out.println("Added successfully");
-                inp.dispose();
-                new StoreManagerScreen(dvd);
+                 System.out.println("Track is added successfully");
                }
                catch(NumberFormatException exp1) {
             	   JOptionPane.showMessageDialog(null,"Wrong input number format!","ERROR", JOptionPane.ERROR_MESSAGE);
             	   nameField.setText("");
-                   directorField.setText("");
-                   categoryField.setText("");
                    lengthField.setText("");
-                   costField.setText("");
                }
                catch(NullPointerException exp2) {
             	   JOptionPane.showMessageDialog(null,"!", "ERROR", JOptionPane.ERROR_MESSAGE);
             	   nameField.setText("");
-                   directorField.setText("");
-                   categoryField.setText("");
                    lengthField.setText("");
-                   costField.setText("");
                }     
         });
-        btnPanel.add(btn);
+        submitTrackPanel.add(btnTrack);
         
+        JButton btnSubmit = new JButton("Submit");
+        btnSubmit.addActionListener(e -> {
+        	try {
+        	cd.setTitle(titleField.getText());
+        	cd.setArtist(authorField.getText());
+        	cd.setCost(Float.parseFloat(costField.getText()));
+        	inp.dispose();
+        	new StoreManagerScreen(cd);
+        	System.out.println("Add successfully");
+        	}catch(NullPointerException e1) {
+        		System.out.println("Exception");
+        	}
+        	});
+        submitTrackPanel.add(btnSubmit);
 
-        form.add(namePanel);
+        form.add(titlePanel);
         form.add(Box.createRigidArea(new Dimension(0, 5)));
         form.add(categoryPanel);
         form.add(Box.createRigidArea(new Dimension(0, 5)));
         form.add(directorPanel);
         form.add(Box.createRigidArea(new Dimension(0, 5)));
+        form.add(nameTrackPanel);
+        form.add(Box.createRigidArea(new Dimension(0, 5)));
         form.add(lengthPanel);
         form.add(Box.createRigidArea(new Dimension(0, 5)));
         form.add(costPanel);
         form.add(Box.createRigidArea(new Dimension(0, 5)));
-        form.add(btnPanel);
+        form.add(submitTrackPanel);
         return form;
     }
+	public static void main(String args[]) {
+		new AddCompactDiscToStoreScreen();
+	}
 }
