@@ -1,10 +1,6 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;
-import hust.soict.hedspi.aims.media.Media;
-import hust.soict.hedspi.aims.media.Playable;
-import hust.soict.hedspi.aims.media.Disc;
-import hust.soict.hedspi.aims.media.Track;
 
 
 public class CompactDisc extends Disc implements Playable{
