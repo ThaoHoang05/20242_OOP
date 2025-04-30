@@ -58,4 +58,9 @@ public class Store {
         }
         return null;
     }
+    
+    //Tao phuong thuc getMediaInStore
+    public ArrayList<Media> getItemsInStore(){
+    	return itemInStore;
+    }
 }
