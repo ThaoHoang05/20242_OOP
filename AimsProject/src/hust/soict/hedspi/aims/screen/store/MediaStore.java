@@ -1,6 +1,8 @@
 package hust.soict.hedspi.aims.screen.store;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -8,8 +10,10 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
@@ -33,6 +37,24 @@ public class MediaStore extends JPanel {
 		
 		if(media instanceof Playable) {
 			JButton playButton = new JButton("Play");
+			playButton.addActionListener(e ->{
+				JDialog playDialog = new JDialog();
+				playDialog.setTitle("Play media");
+				playDialog.setSize(new Dimension(500, 300));
+				playDialog.setLayout(new BorderLayout());
+				
+				JLabel messageLabel = new JLabel("Playing "+ media.getTitle()+" ...", SwingConstants.CENTER);
+	            messageLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+	            playDialog.add(messageLabel, BorderLayout.CENTER);
+
+	            JButton closeButton = new JButton("Close");
+	            closeButton.setSize(50,20);
+	            closeButton.addActionListener(event -> playDialog.dispose());
+	            playDialog.add(closeButton, BorderLayout.SOUTH);
+
+	            // Make the dialog visible
+	            playDialog.setVisible(true);
+			});
 			container.add(playButton);
 		}
 		

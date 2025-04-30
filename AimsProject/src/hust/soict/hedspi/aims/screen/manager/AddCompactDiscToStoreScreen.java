@@ -4,22 +4,31 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import hust.soict.hedspi.aims.media.DigitalVideoDisc;
-import hust.soict.hedspi.aims.media.Media;
 
-public class AddDigitalVideoDiscToStoreScreen extends AddItemToStore {
+import hust.soict.hedspi.aims.media.CompactDisc;
+
+
+public class AddCompactDiscToStoreScreen extends AddItemToStore{
+	private static JFrame inp;
 	private JTextField nameField;
 	private JTextField categoryField;
 	private JTextField costField;
 	private JTextField directorField;
 	private JTextField lengthField;
 	private JButton submit;
-	private DigitalVideoDisc dvd;
-	private static JFrame inp;
-	public AddDigitalVideoDiscToStoreScreen() {
+	private CompactDisc cd;
+	public AddCompactDiscToStoreScreen() {
 		super();
 		inp = new JFrame();
 
@@ -124,8 +133,4 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStore {
         form.add(btnPanel);
         return form;
     }
-
-	public static void main(String args[]) {
-		new AddDigitalVideoDiscToStoreScreen();
-	}
 }

@@ -42,6 +42,24 @@ public class StoreManagerScreen extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+	
+	public StoreManagerScreen(Media m) {
+		init();
+		store.addMedia(m);
+		Container cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+		cp.add(createNorth(), BorderLayout.NORTH);
+		cp.add(createCenter(), BorderLayout.CENTER);
+		
+		
+		setTitle("Store");
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1024, 768);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
+	}
 	JPanel createNorth() {
 		JPanel north = new JPanel();
 		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
@@ -59,13 +77,20 @@ public class StoreManagerScreen extends JFrame {
 		JMenu smUpdateStore = new JMenu("Update Store");
 		JMenuItem addBook = new JMenuItem("Add Book");
 		addBook.addActionListener(e->{
-
+				dispose();
+				new AddBookToStoreScreen();
 		});
 		smUpdateStore.add(addBook);
-		smUpdateStore.add(new JMenuItem("Add CD"));
+		JMenuItem addCD = new JMenuItem("Add CD");
+		addCD.addActionListener(e ->{
+			dispose();
+			new AddCompactDiscToStoreScreen();
+		});
+		smUpdateStore.add(addCD);
 		JMenuItem addDVD = new JMenuItem("Add DVD");
-		addDVD.addActionListener(e -> {
-
+		addDVD.addActionListener(e -> { 
+				dispose();
+				new AddDigitalVideoDiscToStoreScreen();
 		});
 		smUpdateStore.add(addDVD);
 		menu.add(smUpdateStore);
@@ -118,6 +143,7 @@ public class StoreManagerScreen extends JFrame {
 		store.addMedia(new Book("When the breath becomes Air", "Memoir",10.0f));
 		 isInitialized = true;
 	}
+	 
 
 	public static void main(String args[]) {
 		new StoreManagerScreen();

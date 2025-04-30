@@ -27,6 +27,9 @@ public class Book extends Media{
             System.out.println("Tac gia da ton tai trong danh sach");
         }
     }
+    public void addAuthor(ArrayList<String> author) {
+    	this.authors = author;
+    }
 
     public void removeAuthor(String authorName){
         if(authors.isEmpty()){
