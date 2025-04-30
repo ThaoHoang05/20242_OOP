@@ -1,10 +1,6 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;
-import hust.soict.hedspi.aims.media.Media;
-import hust.soict.hedspi.aims.media.Playable;
-import hust.soict.hedspi.aims.media.Disc;
-import hust.soict.hedspi.aims.media.Track;
 
 
 public class CompactDisc extends Disc implements Playable{
@@ -25,6 +21,12 @@ public class CompactDisc extends Disc implements Playable{
         super();
         this.artist = artist;
         super.setTitle(title);
+    }
+    public void setTilte(String Title) {
+    	super.setTitle(Title);
+    }
+    public void setArtist(String artist) {
+    	this.artist = artist;
     }
     public void addTrack(Track track){
         boolean found = false;
