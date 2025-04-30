@@ -26,6 +26,12 @@ public class CompactDisc extends Disc implements Playable{
         this.artist = artist;
         super.setTitle(title);
     }
+    public void setTilte(String Title) {
+    	super.setTitle(Title);
+    }
+    public void setArtist(String artist) {
+    	this.artist = artist;
+    }
     public void addTrack(Track track){
         boolean found = false;
         for(Track t : tracks){
