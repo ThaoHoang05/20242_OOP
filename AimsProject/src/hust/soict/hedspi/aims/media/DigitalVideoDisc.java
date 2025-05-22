@@ -2,6 +2,7 @@ package hust.soict.hedspi.aims.media;
 
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.Disc;
 
 public class DigitalVideoDisc extends Disc implements Playable{
@@ -49,7 +50,10 @@ public class DigitalVideoDisc extends Disc implements Playable{
     }
 
     @Override
-    public void play() {
+    public void play() throws PlayerException {
+    	if(this.getLength()> 0) {
+    		
+    	}else throw new PlayerException("ERROR: CD length is non-positive");
     }
 }
 

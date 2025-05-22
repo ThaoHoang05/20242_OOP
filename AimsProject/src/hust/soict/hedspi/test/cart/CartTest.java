@@ -1,9 +1,11 @@
 package hust.soict.hedspi.test.cart;
+import javax.naming.LimitExceededException;
+
 import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 
 public class CartTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LimitExceededException {
         //Create a new cart
         Cart cart = new Cart();
         //Creat new DVD objects and add them to the cart
