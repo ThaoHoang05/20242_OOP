@@ -25,6 +25,7 @@ import hust.soict.hedspi.aims.store.Store;
 
 import java.io.IOException;
 
+import javax.naming.LimitExceededException;
 import javax.swing.JOptionPane;
 
 public class CartController{
@@ -85,7 +86,7 @@ public class CartController{
     }
 
     @FXML
-    void btnRemovePressed(ActionEvent event) {
+    void btnRemovePressed(ActionEvent event) throws LimitExceededException {
     	Media media = tblMedia.getSelectionModel().getSelectedItem();
     	if (media != null) {
             cart.removeMedia(media);

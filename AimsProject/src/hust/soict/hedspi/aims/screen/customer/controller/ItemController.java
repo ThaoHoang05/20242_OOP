@@ -1,8 +1,8 @@
 package hust.soict.hedspi.aims.screen.customer.controller;
+import javax.naming.LimitExceededException;
 import javax.swing.JOptionPane;
 
 import hust.soict.hedspi.aims.cart.Cart;
-import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
 import javafx.event.ActionEvent;
@@ -34,7 +34,7 @@ public class ItemController {
     
 
     @FXML
-    void btnAddToCartClicked(ActionEvent event) {	
+    void btnAddToCartClicked(ActionEvent event) throws LimitExceededException {	
     	cart.addMedia(media);
     }
 

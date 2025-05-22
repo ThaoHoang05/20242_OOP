@@ -3,6 +3,8 @@ package hust.soict.hedspi.aims.cart;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.hedspi.aims.media.Media;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,22 +17,19 @@ public class Cart {
 
 
     // Them 1 item vao Cart
-    public void addMedia(Media item) {
-        if (itemsOrdered.size() == MAX_NUMBER_ORDEREDS) {
-            System.out.println("The Cart is full");
-        } else {
-            item.setId(itemsOrdered.size() + 1);
-            itemsOrdered.add(item);
-        }
+    public void addMedia(Media item) throws LimitExceededException {
+        if(itemsOrdered.size() < MAX_NUMBER_ORDEREDS) {
+        	itemsOrdered.add(item);
+        }else
+        	throw new LimitExceededException("ERROR: The Cart is full !");
     }
 
     //Xoa item da chon khoi Cart neu Cart rong In ra thongg bao Cart trong neu khong thuc hien xoa item khoi cart
-    public void removeMedia(Media item) {
-        if (itemsOrdered.isEmpty()) {
-            System.out.println("The Cart is empty");
-        } else {
-            itemsOrdered.remove(item);
-        }
+    public void removeMedia(Media item) throws LimitExceededException {
+        if(!itemsOrdered.isEmpty()) {
+        	itemsOrdered.remove(item);
+        }else
+        	throw new LimitExceededException("ERROR: The Cart is empty!");
     }
     
     public ObservableList<Media> getItemsOrdered(){
@@ -49,10 +48,9 @@ public class Cart {
     }
 
     //In ra cac item co trong cart
-    public void print() {
+    public void print() throws LimitExceededException {
         if (itemsOrdered.isEmpty()) {
-            System.out.println("The Cart is empty");
-            return;
+            throw new LimitExceededException("ERROR: The Cart is Empty");
         }
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
@@ -86,10 +84,11 @@ public class Cart {
      *          Neu khong tim thay tra ve thong bao "The item is not in this Cart" .
      *          Neu thay in ra thong tin cua item do.
      * @param id
+     * @throws LimitExceededException 
      */
-    public void search(int id) {
-        if (itemsOrdered.isEmpty()) {
-            System.out.println("The Cart is empty");
+    public void search(int id) throws LimitExceededException {
+    	 if (itemsOrdered.isEmpty()) {
+             throw new LimitExceededException("ERROR: The Cart is Empty");
         } else {
             boolean found = false;
             for (Media item : itemsOrdered) {
@@ -105,9 +104,9 @@ public class Cart {
         }
     }
     // Tim kiem item bang title
-    public void search(String title) {
+    public void search(String title) throws LimitExceededException {
         if (itemsOrdered.isEmpty()) {
-            System.out.println("The Cart is empty");
+            throw new LimitExceededException("The cart is empty");
         } else {
             boolean found = false;
             for (Media item : itemsOrdered) {

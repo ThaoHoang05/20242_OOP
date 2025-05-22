@@ -1,8 +1,10 @@
 package hust.soict.hedspi.aims.store;
+import javax.naming.LimitExceededException;
+
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 
 public class StoreTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LimitExceededException {
         Store store = new Store();
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("Snow White","Drama","Marc Webb",109,20.00f);
         store.addMedia(dvd1);

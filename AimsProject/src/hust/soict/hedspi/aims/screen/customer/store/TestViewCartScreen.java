@@ -1,5 +1,7 @@
 package hust.soict.hedspi.aims.screen.customer.store;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.Book;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
@@ -28,7 +30,7 @@ public class TestViewCartScreen extends Application {
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws LimitExceededException {
 		cart = new Cart();
 		store = new Store();
 		cart.addMedia(new DigitalVideoDisc("Harry Potter and the Philosopher's Stone","Fantasy","Chris Colombus" ,3.0f));
