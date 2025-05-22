@@ -2,12 +2,14 @@ package hust.soict.hedspi.aims.cart;
 
 import java.util.ArrayList;
 import hust.soict.hedspi.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 
 public class Cart {
 
     public static final int MAX_NUMBER_ORDEREDS = 20;   //Tao final de gioi han so luong media co the co trong Cart
-    private ArrayList<Media> itemsOrdered = new ArrayList<>(MAX_NUMBER_ORDEREDS);   //Tao cart
+    private  ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();   //Tao cart
 
 
     // Them 1 item vao Cart
@@ -27,7 +29,11 @@ public class Cart {
             itemsOrdered.remove(item);
         }
     }
-
+    
+    public ObservableList<Media> getItemsOrdered(){
+    	return itemsOrdered;
+    }
+    
     //Tinh tong gia tien cua cac item co trong Cart
     public float totalCost() {
         float totalCost = 0f;
