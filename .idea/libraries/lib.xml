@@ -4,6 +4,9 @@
       <root url="file://C:/Program Files (x86)/Java FX/javafx-sdk-24.0.1/lib" />
     </CLASSES>
     <JAVADOC />
+    <NATIVE>
+      <root url="file://C:/Program Files (x86)/Java FX/javafx-sdk-24.0.1/bin" />
+    </NATIVE>
     <SOURCES>
       <root url="file://C:/Program Files (x86)/Java FX/javafx-sdk-24.0.1/src/javafx.base" />
       <root url="file://C:/Program Files (x86)/Java FX/javafx-sdk-24.0.1/src/javafx.controls" />

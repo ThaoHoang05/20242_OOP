@@ -1,6 +1,8 @@
 package hust.soict.hedspi.aims.cart;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+
 import hust.soict.hedspi.aims.media.Media;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ public class Cart {
         if (itemsOrdered.size() == MAX_NUMBER_ORDEREDS) {
             System.out.println("The Cart is full");
         } else {
+            item.setId(itemsOrdered.size() + 1);
             itemsOrdered.add(item);
         }
     }
@@ -139,4 +142,14 @@ public class Cart {
     public void emptyCart(){
         itemsOrdered.clear();
     }
+    public ObservableList<Media> filter(Predicate<Media> condition) {
+        ObservableList<Media> filteredList = FXCollections.observableArrayList();
+        for (Media media : itemsOrdered) {
+            if (condition.test(media)) {
+                filteredList.add(media);
+            }
+        }
+        return filteredList;
+    }
+
 }

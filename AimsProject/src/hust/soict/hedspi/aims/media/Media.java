@@ -26,9 +26,11 @@ public abstract class Media {
         this.title = title;
     }
     public int getId() {
-        return id;
+        return this.id;
     }
-
+    public void setId(int id){
+        this.id = id;
+    }
     public String getTitle() {
         return title;
     }

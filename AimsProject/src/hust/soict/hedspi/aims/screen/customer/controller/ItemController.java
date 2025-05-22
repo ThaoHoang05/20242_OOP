@@ -1,5 +1,8 @@
 package hust.soict.hedspi.aims.screen.customer.controller;
+import javax.swing.JOptionPane;
+
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
 import javafx.event.ActionEvent;
@@ -32,10 +35,19 @@ public class ItemController {
 
     @FXML
     void btnAddToCartClicked(ActionEvent event) {	
+    	cart.addMedia(media);
     }
 
     @FXML
     void btnPlayClicked(ActionEvent event) {
+    	if (media instanceof Playable) {
+            if (((Playable)media).getLength() > 0) {
+                JOptionPane.showMessageDialog(null, "Now playing: " + media.getTitle(), "Playing ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "This DVD has no content!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }
     public void setData(Media media) {
     	this.media = media;
