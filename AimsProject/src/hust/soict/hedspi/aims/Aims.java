@@ -5,12 +5,15 @@ import  hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import hust.soict.hedspi.aims.store.Store;
 import java.util.Scanner;
+
+import javax.naming.LimitExceededException;
+
 import hust.soict.hedspi.aims.media.Media;
 public class Aims {
     private static Store store = new Store();
     private static Cart anOrder = new Cart();
     private static Scanner scanf = new Scanner(System.in);
-    public static void showMenu(){
+    public static void showMenu() throws LimitExceededException{
 
         System.out.println("AIMS");
         System.out.println("--------------------------------------------------");
@@ -66,7 +69,7 @@ public class Aims {
         }
     }
 
-    public static void storeMenu() {
+    public static void storeMenu() throws LimitExceededException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. See a media’s details");
@@ -152,7 +155,7 @@ public class Aims {
         }
     }
 
-    public static void mediaDetailsMenu() {
+    public static void mediaDetailsMenu() throws LimitExceededException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Add to cart");
@@ -171,7 +174,7 @@ public class Aims {
         }
     }
 
-    public static void cartMenu() {
+    public static void cartMenu() throws LimitExceededException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Filter media in cart");
@@ -220,7 +223,7 @@ public class Aims {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws LimitExceededException{
         //TODO auto- generated method stub
 
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
