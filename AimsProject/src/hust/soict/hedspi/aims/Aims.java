@@ -3,12 +3,10 @@ package hust.soict.hedspi.aims;
 
 import  hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.store.Store;
 import java.util.Scanner;
-
 import javax.naming.LimitExceededException;
-
-import hust.soict.hedspi.aims.media.Media;
 public class Aims {
     private static Store store = new Store();
     private static Cart anOrder = new Cart();
@@ -186,7 +184,8 @@ public class Aims {
         System.out.println("--------------------------------");
         System.out.println("Please choose a number: 0-1-2-3-4-5");
         int option = scanf.nextInt();
-        switch(option){
+        OUTER:
+        switch (option) {
             case 1:
                 System.out.println("Choose type of filter ( 1 -id 2-title)");
                 int filterType = scanf.nextInt();
@@ -203,13 +202,16 @@ public class Aims {
             case 2:
                 System.out.println("Choose type of sort ( 1 -title 2-cost)");
                 int sortType = scanf.nextInt();
-                if(sortType == 1){
-                    anOrder.sortById();
-                }else if(sortType == 2){
-                    anOrder.sortByTitle();
+                switch (sortType) {
+                    case 1:
+                        anOrder.sortById();
+                        break;
+                    case 2:
+                        anOrder.sortByTitle();
+                        break;
+                    default:
+                        break OUTER;
                 }
-                else
-                    break;
             case 3:
                 break;
             case 4:
