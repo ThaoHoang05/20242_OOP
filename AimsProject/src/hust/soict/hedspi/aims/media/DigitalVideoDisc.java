@@ -1,11 +1,10 @@
 package hust.soict.hedspi.aims.media;
 
-import hust.soict.hedspi.aims.media.Media;
-import hust.soict.hedspi.aims.media.Playable;
-import hust.soict.hedspi.aims.media.Disc;
+import hust.soict.hedspi.aims.exception.PlayerException;
 
 public class DigitalVideoDisc extends Disc implements Playable{
 
+    @Override
     public int getLength() {
         return super.getLength();
     }
@@ -38,6 +37,7 @@ public class DigitalVideoDisc extends Disc implements Playable{
         super.setLength(length);
     }
 
+    @Override
     public String toString(){
         return "DVD - "+super.getId()+" "+super.getTitle()+" - "+super.getCategory()+" - "+super.getDirector()+" - "+ super.getLength()+": "+ super.getCost();
     }
@@ -49,7 +49,10 @@ public class DigitalVideoDisc extends Disc implements Playable{
     }
 
     @Override
-    public void play() {
+    public void play() throws PlayerException {
+    	if(this.getLength()> 0) {
+    		
+    	}else throw new PlayerException("ERROR: CD length is non-positive");
     }
 }
 

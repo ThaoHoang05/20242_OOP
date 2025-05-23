@@ -1,7 +1,5 @@
 package hust.soict.hedspi.aims.media;
 
-import hust.soict.hedspi.aims.media.Media;
-
 public abstract class Disc extends Media {
     private int length;
     private String director;
@@ -48,4 +46,5 @@ public abstract class Disc extends Media {
         super.setCategory(category);
         super.setCost(cost);
     }
+    
 }

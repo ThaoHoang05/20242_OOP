@@ -1,12 +1,12 @@
 package hust.soict.hedspi.aims.screen.manager;
 
+import hust.soict.hedspi.aims.media.Book;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,8 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import hust.soict.hedspi.aims.media.Book;
 
 public class AddBookToStoreScreen extends AddItemToStore {
 	private JTextField name;
@@ -37,10 +35,11 @@ public class AddBookToStoreScreen extends AddItemToStore {
         inp.setResizable(false);
         inp.setLayout(new BorderLayout());
         inp.add(super.createNorth(inp), BorderLayout.NORTH);
-        inp.add(getForm(), BorderLayout.CENTER);
+        inp.add(this.getForm(), BorderLayout.CENTER);
         inp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         inp.setVisible(true);
 	}
+    
 	JPanel getForm() {
 		JPanel form = new JPanel();
         form.setPreferredSize(new Dimension(1000, 1000));
@@ -83,7 +82,7 @@ public class AddBookToStoreScreen extends AddItemToStore {
         JButton btn = new JButton("Submit");
         btn.addActionListener(e -> {
                try { b = new Book(name.getText(), category.getText(), Float.parseFloat(cost.getText()));
-                  author = new ArrayList<String>(Arrays.asList(authors.getText().split("[^a-zA-Z\\s]+")));
+                  author = new ArrayList<>(Arrays.asList(authors.getText().split("[^a-zA-Z\\s]+")));
                   for(String a: author) {
                 	  System.out.println(a);
                   }

@@ -1,9 +1,8 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;
-import hust.soict.hedspi.aims.media.Media;
 public class Book extends Media{
-    private ArrayList<String> authors = new ArrayList<String>();
+    private ArrayList<String> authors = new ArrayList<>();
     public Book(String title) {
         super();
         this.setTitle(title);
@@ -21,10 +20,10 @@ public class Book extends Media{
     }
 
     public void addAuthor(String authorName){
-        if(!authors.equals(authorName)){
-            authors.add(authorName);
+        if(authors.contains(authorName)){
+            System.err.println("ERROR: Author name already exist!");
         }else{
-            System.out.println("Tac gia da ton tai trong danh sach");
+            authors.add(authorName);
         }
     }
     public void addAuthor(ArrayList<String> author) {

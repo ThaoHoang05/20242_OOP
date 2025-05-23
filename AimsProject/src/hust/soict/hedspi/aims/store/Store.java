@@ -3,6 +3,8 @@ import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Book;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import java.util.ArrayList;
+
+import javax.naming.LimitExceededException;
 public class Store {
 
     //Tao doi tuong itemInStore
@@ -22,9 +24,9 @@ public class Store {
     }
 
     //Loai bo doi tuong item khoi store truoc do kiem tra xem store co rong khong
-    public void removeMedia(Media item){
+    public void removeMedia(Media item) throws LimitExceededException{
         if(itemInStore.isEmpty()){
-            System.out.println("Store is empty");
+            throw new LimitExceededException("The Store is empty");
         }else
             itemInStore.remove(item);
     }
