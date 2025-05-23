@@ -45,16 +45,12 @@ public abstract class Media {
     public void setCost(float cost) {
         this.cost = cost;
     }
+    @SuppressWarnings("null")
     public boolean equals(Media m){
-        if(m == this){
-            return true;
-        }
+        if(m == null) throw new NullPointerException(m.getTitle()+" does not exist.");
         else{
-            if(!(m instanceof Media)){
-                return false;
-            }
-        }
-        return ((Media)m).getTitle().equals(this.getTitle());
+            
+            return ((Media)m).getTitle().equals(this.getTitle()) &&((Media)m).getCost() == this.getCost();}
     }
 
 }

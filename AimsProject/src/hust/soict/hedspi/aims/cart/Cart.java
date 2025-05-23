@@ -1,6 +1,5 @@
 package hust.soict.hedspi.aims.cart;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javax.naming.LimitExceededException;

@@ -2,8 +2,10 @@ package hust.soict.hedspi.aims;
 
 
 import  hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import hust.soict.hedspi.aims.media.Media;
+import hust.soict.hedspi.aims.media.Playable;
 import hust.soict.hedspi.aims.store.Store;
 import java.util.Scanner;
 import javax.naming.LimitExceededException;
@@ -11,7 +13,7 @@ public class Aims {
     private static Store store = new Store();
     private static Cart anOrder = new Cart();
     private static Scanner scanf = new Scanner(System.in);
-    public static void showMenu() throws LimitExceededException{
+    public static void showMenu() throws LimitExceededException, PlayerException{
 
         System.out.println("AIMS");
         System.out.println("--------------------------------------------------");
@@ -67,7 +69,7 @@ public class Aims {
         }
     }
 
-    public static void storeMenu() throws LimitExceededException {
+    public static void storeMenu() throws LimitExceededException, PlayerException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. See a media’s details");
@@ -137,7 +139,13 @@ public class Aims {
                     Media m = store.equals(title);
                     if(m != null){
                         found = true;
-                        System.out.println("Playing "+ m.getTitle()+"......");
+                        if(m instanceof Playable){
+                            try {
+                                ((Playable)m).play();
+                            } catch (PlayerException e) {
+                                throw e;
+                            }
+                        }
                     }
                     else{
                         found = true;
@@ -153,7 +161,7 @@ public class Aims {
         }
     }
 
-    public static void mediaDetailsMenu() throws LimitExceededException {
+    public static void mediaDetailsMenu() throws LimitExceededException, PlayerException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Add to cart");
@@ -164,15 +172,17 @@ public class Aims {
         int option = scanf.nextInt();
         switch(option){
             case 1:
+                
                 break;
             case 2:
+                
                 break;
             default:
                 storeMenu();
         }
     }
 
-    public static void cartMenu() throws LimitExceededException {
+    public static void cartMenu() throws LimitExceededException, PlayerException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Filter media in cart");
@@ -185,20 +195,24 @@ public class Aims {
         System.out.println("Please choose a number: 0-1-2-3-4-5");
         int option = scanf.nextInt();
         OUTER:
+        OUTER_1:
         switch (option) {
             case 1:
                 System.out.println("Choose type of filter ( 1 -id 2-title)");
                 int filterType = scanf.nextInt();
-                if(filterType == 1){
-                    int id = scanf.nextInt();
-                    anOrder.search(id);
+                switch (filterType) {
+                    case 1:
+                        int id = scanf.nextInt();
+                        anOrder.search(id);
+                        break;
+                    case 2:
+                        scanf.nextLine();
+                        String title = scanf.nextLine();
+                        anOrder.search(title);
+                        break;
+                    default:
+                        break OUTER_1;
                 }
-                else if(filterType == 2){
-                    scanf.nextLine();
-                    String title = scanf.nextLine();
-                    anOrder.search(title);
-                }else
-                    break;
             case 2:
                 System.out.println("Choose type of sort ( 1 -title 2-cost)");
                 int sortType = scanf.nextInt();
@@ -225,7 +239,7 @@ public class Aims {
         }
     }
 
-    public static void main(String[] args) throws LimitExceededException{
+    public static void main(String[] args) throws LimitExceededException, PlayerException{
         //TODO auto- generated method stub
 
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
