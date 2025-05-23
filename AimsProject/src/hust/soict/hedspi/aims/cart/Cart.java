@@ -85,7 +85,7 @@ public class Cart {
      * @param id
      * @throws LimitExceededException 
      */
-    public void search(int id) throws LimitExceededException {
+    public Media search(int id) throws LimitExceededException {
     	 if (itemsOrdered.isEmpty()) {
              throw new LimitExceededException("ERROR: The Cart is Empty");
         } else {
@@ -94,16 +94,18 @@ public class Cart {
                 if (item.getId() == id) {
                     display(item);
                     found = true;
-                    break;
+                    return item;
                 }
             }
             if (!found) {
                 System.out.println("The item is not in this Cart");
             }
         }
+    	 return null;
     }
     // Tim kiem item bang title
-    public void search(String title) throws LimitExceededException {
+    public Media search(String title) throws LimitExceededException {
+    	
         if (itemsOrdered.isEmpty()) {
             throw new LimitExceededException("The cart is empty");
         } else {
@@ -112,12 +114,15 @@ public class Cart {
                 if (item.getTitle().equals(title)) {
                     display(item);
                     found = true;
+                    return item;
                 }
             }
             if (!found) {
                 System.out.println("The media is not in this Cart");
+                return null;
             }
         }
+		return null;
     }
 
     // Sort Cart theo Id

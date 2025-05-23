@@ -8,12 +8,11 @@ import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
 import hust.soict.hedspi.aims.store.Store;
 import java.util.Scanner;
-import javax.naming.LimitExceededException;
 public class Aims {
     private static Store store = new Store();
     private static Cart anOrder = new Cart();
     private static Scanner scanf = new Scanner(System.in);
-    public static void showMenu() throws LimitExceededException, PlayerException{
+    public static void showMenu() throws Exception{
 
         System.out.println("AIMS");
         System.out.println("--------------------------------------------------");
@@ -63,13 +62,12 @@ public class Aims {
                 break;
             case 3:
                 cartMenu();
-                break;
             default:
                 System.exit(0);
         }
     }
 
-    public static void storeMenu() throws LimitExceededException, PlayerException {
+    public static void storeMenu() throws Exception {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. See a media’s details");
@@ -81,87 +79,93 @@ public class Aims {
         System.out.println("Please choose a number: 0-1-2-3-4");
 
         int option = scanf.nextInt();
-        switch(option){
-            case 1:
-                boolean found = false;
-                while(!found){
-                    scanf.nextLine();
-                    System.out.println("Enter the media title(Choose -1 to stop):");
-                    String title = scanf.nextLine();
-                    if(title.equals("-1")){
-                        break;
-                    }
-                    Media m = store.equals(title);
-                    if(m != null){
-                        found = true;
-                        System.out.println("Details: ");
-                        System.out.println(m);
-                        mediaDetailsMenu();
-                    }
-                    else{
-                        found = true;
-                        System.out.println("Media does not exist");
-                        break;
-                    }
-                }
-                break;
-            case 2:
-                found = false;
-                while(!found){
-                    scanf.nextLine();
-                    System.out.println("Enter the media title(Choose -1 to stop):");
-                    String title = scanf.nextLine();
-                    if(title.equals("-1")){
-                        break;
-                    }
-                    Media m = store.equals(title);
-                    if(m != null){
-                        found = true;
-                        anOrder.addMedia(m);
-                        System.out.println("Media added to cart");
-                        anOrder.print();
-                    }
-                    else{
-                        found = true;
-                        System.out.println("Media does not exist");
-                    }
-                }
-                break;
-            case 3:
-                found = false;
-                while(!found){
-                    scanf.nextLine();
-                    System.out.println("Enter the media title(Choose -1 to stop):");
-                    String title = scanf.nextLine();
-                    if(title.equals("-1")){
-                        break;
-                    }
-                    Media m = store.equals(title);
-                    if(m != null){
-                        found = true;
-                        if(m instanceof Playable){
-                            try {
-                                ((Playable)m).play();
-                            } catch (PlayerException e) {
-                                throw e;
-                            }
-                        }
-                    }
-                    else{
-                        found = true;
-                        System.out.println("Media does not exist");
-                    }
-                }
-                break;
-            case 4:
-                cartMenu();
-                break;
-            default:
-                showMenu();
-        }
+        try {
+			switch(option){
+			    case 1:
+			        boolean found = false;
+			        while(!found){
+			            scanf.nextLine();
+			            System.out.println("Enter the media title(Choose -1 to stop):");
+			            String title = scanf.nextLine();
+			            if(title.equals("-1")){
+			                break;
+			            }
+			            Media m = store.equals(title);
+			            if(m != null){
+			                found = true;
+			                System.out.println("Details: ");
+			                System.out.println(m);
+			                mediaDetailsMenu(m);
+			            }
+			            else{
+			                found = true;
+			                System.out.println("Media does not exist");
+			                break;
+			            }
+			        }
+			        break;
+			    case 2:
+			        found = false;
+			        while(!found){
+			            scanf.nextLine();
+			            System.out.println("Enter the media title(Choose -1 to stop):");
+			            String title = scanf.nextLine();
+			            if(title.equals("-1")){
+			                break;
+			            }
+			            Media m = store.equals(title);
+			            if(m != null){
+			                found = true;
+			                anOrder.addMedia(m);
+			                System.out.println("Media added to cart");
+			                anOrder.print();
+			            }
+			            else{
+			                found = true;
+			                System.out.println("Media does not exist");
+			            }
+			        }
+			        break;
+			    case 3:
+			        found = false;
+			        while(!found){
+			            scanf.nextLine();
+			            System.out.println("Enter the media title(Choose -1 to stop):");
+			            String title = scanf.nextLine();
+			            if(title.equals("-1")){
+			                break;
+			            }
+			            Media m = store.equals(title);
+			            if(m != null){
+			                found = true;
+			                if(m instanceof Playable){
+			                    try {
+			                        ((Playable)m).play();
+			                    } catch (PlayerException e) {
+			                    	e.getMessage();
+			                        e.printStackTrace();
+			                    }
+			                }
+			            }
+			            else{
+			                found = true;
+			                System.out.println("Media does not exist");
+			            }
+			        }
+			        break;
+			    case 4:
+			        cartMenu();
+			        break;
+			    default:
+			        showMenu();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
-    public static void mediaDetailsMenu() throws LimitExceededException, PlayerException {
+    public static void mediaDetailsMenu(Media m) throws Exception {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Add to cart");
@@ -172,17 +176,19 @@ public class Aims {
         int option = scanf.nextInt();
         switch(option){
             case 1:
-                
+            	anOrder.addMedia(m);
+            	System.out.println(m.getTitle()+" them vao thanh cong.");
                 break;
             case 2:
-                
-                break;
+                if(m instanceof Playable) {
+                	((Playable)m).play();
+                }
             default:
                 storeMenu();
         }
     }
 
-    public static void cartMenu() throws LimitExceededException, PlayerException {
+    public static void cartMenu() throws Exception {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Filter media in cart");
@@ -197,23 +203,26 @@ public class Aims {
         OUTER:
         OUTER_1:
         switch (option) {
-            case 1:
+            case 1 -> {
                 System.out.println("Choose type of filter ( 1 -id 2-title)");
                 int filterType = scanf.nextInt();
                 switch (filterType) {
-                    case 1:
+                    case 1 -> {
                         int id = scanf.nextInt();
                         anOrder.search(id);
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         scanf.nextLine();
                         String title = scanf.nextLine();
                         anOrder.search(title);
-                        break;
-                    default:
+                    }
+                    default -> {
                         break OUTER_1;
+                    }
                 }
-            case 2:
+            }
+
+            case 2 -> {
                 System.out.println("Choose type of sort ( 1 -title 2-cost)");
                 int sortType = scanf.nextInt();
                 switch (sortType) {
@@ -226,20 +235,91 @@ public class Aims {
                     default:
                         break OUTER;
                 }
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
+            }
+            case 3 -> {
+            	int choice;
+
+                do {
+                    System.out.println("Choose your media that you want to remove (1 - id; 2 - title; 0 - exit):");
+                    choice = scanf.nextInt();
+                    
+                    if (choice == 1) {
+                        System.out.println("Enter the media ID to remove:");
+                        int id = scanf.nextInt();
+                        Media m = (Media)anOrder.search(id);
+                        if(m != null) {
+                        System.out.println("Removing media with ID: " + id);
+                        anOrder.removeMedia(m);
+                        }else throw new Exception(id +" khong ton tai!");
+                    } else if (choice == 2) {
+                        scanf.nextLine(); // Xử lý dòng mới còn sót lại
+                        System.out.println("Enter the media title to remove:");
+                        String title = scanf.nextLine();
+                        Media m = anOrder.search(title);
+                        if(m != null) {
+                        System.out.println("Removing media with title: " + title);
+                        anOrder.removeMedia(m);
+                        }
+                        else throw new Exception(title+" khong ton tai!");
+                    } else if (choice == 0) {
+                        System.out.println("Exiting...");
+                    } else {
+                        System.out.println("Invalid choice. Please select 1, 2, or 0 to exit.");
+                    }
+                } while (choice != 0); 	
+            }
+            case 4 -> {
+            	int choice;
+
+                do {
+                    System.out.println("Choose your media that you want to play (1 - id; 2 - title; 0 - exit):");
+                    choice = scanf.nextInt();
+                    
+                    if (choice == 1) {
+                        System.out.println("Enter the media ID to remove:");
+                        int id = scanf.nextInt();
+                        Media m = (Media)anOrder.search(id);
+                        if(m != null) {
+                        	if(m instanceof Playable) {
+                        	if(((Playable) m).getLength() > 0) {
+                        System.out.println("Playing media with ID: " + m.getTitle());
+                        	}else {
+                        		throw new PlayerException();
+                        	}
+                        	}else throw new Exception(m.getTitle()+" khong the play duoc");
+                        	
+                        }else throw new Exception(id +" khong ton tai!");
+                    } else if (choice == 2) {
+                        scanf.nextLine(); // Xử lý dòng mới còn sót lại
+                        System.out.println("Enter the media title to remove:");
+                        String title = scanf.nextLine();
+                        Media m = anOrder.search(title);
+                        if(m != null) {
+                        	if(m instanceof Playable) {
+                            	if(((Playable) m).getLength() > 0) {
+                            System.out.println("Playing media with ID: " + title);
+                            	}else {
+                            		throw new PlayerException();
+                            	}
+                            	}else throw new Exception(m.getTitle()+" khong the play duoc");
+                        }
+                        else throw new Exception(title+" khong ton tai!");
+                    } else if (choice == 0) {
+                        System.out.println("Exiting...");
+                    } else {
+                        System.out.println("Invalid choice. Please select 1, 2, or 0 to exit.");
+                    }
+                } while (choice != 0);
+            }
+            case 5 -> {
                 System.out.println("An Order is created.");
                 anOrder.emptyCart();
-                break;
-            default:
-                showMenu();
+            }
+            default -> showMenu();
         }
     }
 
-    public static void main(String[] args) throws LimitExceededException, PlayerException{
+    public static void main(String[] args) throws Exception{
         //TODO auto- generated method stub
 
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
